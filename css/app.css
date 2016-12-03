@@ -1,3 +1,10 @@
 .grid{
     border: 1px solid black;
 }
+.cell{
+    width: 27px;
+    height: 27px;
+    background: red;
+    outline: 1px solid lime;
+    float: left;
+}
