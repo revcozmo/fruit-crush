@@ -8,3 +8,15 @@
     outline: 1px solid lime;
     float: left;
 }
+.apple{
+    background: url('../assets/apple.png')
+}
+.grape{
+    background: url('../assets/grape.png')
+}
+.orange{
+    background: url('../assets/orange.png')
+}
+.cherry{
+    background: url('../assets/cherry.png')
+}
