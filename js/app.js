@@ -32,10 +32,16 @@ function randomizeGrid()
 {
     for (var y = 1; y <= gridSize; y++) {
         for (var x = 1 ; x <= gridSize; x++) {
-            $('.grid').append('<div class="cell '+randomFruit()+'"></div>');
+            fruit  = randomFruit();
+            $('.grid').append('<div class="cell '+fruit+'" data-fruit="'+fruit+'"></div>');
         }
     }
 }
 
+
 initializeGrid();
 randomizeGrid();
+
+$('.cell').click(function(){
+    console.log($(this).data('fruit'));
+});
