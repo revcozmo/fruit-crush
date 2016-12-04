@@ -16,6 +16,20 @@ var randomFruitContainer = [
     'orange'
 ];
 
+var grid = [
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0]
+];
+
+
 function initializeGrid()
 {
     $('.grid').css('width', actualSize);
@@ -33,15 +47,22 @@ function randomizeGrid()
     for (var y = 1; y <= gridSize; y++) {
         for (var x = 1 ; x <= gridSize; x++) {
             fruit  = randomFruit();
-            $('.grid').append('<div class="cell '+fruit+'" data-fruit="'+fruit+'"></div>');
+            grid[y-1][x-1] = fruit;
+            $('.grid').append('<div class="cell '+fruit+'" data-fruit="'+fruit+'" data-x="'+(x-1)+'" data-y="'+(y-1)+'"></div>');
         }
     }
 }
 
+function checkAround(x, y, fruit)
+{
+    
+}
 
 initializeGrid();
 randomizeGrid();
 
+
 $('.cell').click(function(){
     console.log($(this).data('fruit'));
 });
+
