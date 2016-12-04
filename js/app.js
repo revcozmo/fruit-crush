@@ -55,7 +55,25 @@ function randomizeGrid()
 
 function checkAround(x, y, fruit)
 {
-    
+
+}
+
+function checkUp(x, y, fruit)
+{   
+    if (y !== 0) {
+        if (grid[(y - 1)][x] == fruit) {
+            $('[data-x="'+x+'"][data-y="'+y+'"]').addClass('removed');
+            if (grid[y][x] == fruit) {
+            $('[data-x="'+x+'"][data-y="'+(y -1)+'"]').addClass('removed');
+            }
+            current = (y - 1);
+            console.log('top matches');
+            console.log('removed: '+ x + ''+y);
+            checkUp(x, current, fruit);
+        }else{
+            console.log('top does not match');
+        }
+    }
 }
 
 initializeGrid();
@@ -63,6 +81,11 @@ randomizeGrid();
 
 
 $('.cell').click(function(){
-    console.log($(this).data('fruit'));
+    fruit = $(this).data('fruit');
+    x = $(this).data('x');
+    y = $(this).data('y');
+    fruit = $(this).data('fruit');
+
+    checkUp(x, y, fruit);
 });
 

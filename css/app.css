@@ -22,4 +22,9 @@
 }
 .cell:hover{
     cursor: pointer;
+    /*border-color: red;*/
+    outline: 1px solid red;
+}
+.removed{
+    background-image: none !important;
 }
