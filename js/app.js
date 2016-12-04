@@ -1,3 +1,11 @@
+// sound stuff
+var correct = "correct";
+var incorrect = "incorrrect";
+var played = false;
+createjs.Sound.registerSound("sounds/correct.wav", correct);
+createjs.Sound.registerSound("sounds/incorrect.wav", incorrect);
+
+
 var gridSize = 10;
 var cellSize = 27;
 var actualSize = 10 * 27;
@@ -63,15 +71,24 @@ function checkUp(x, y, fruit)
     if (y !== 0) {
         if (grid[(y - 1)][x] == fruit) {
             $('[data-x="'+x+'"][data-y="'+y+'"]').addClass('removed');
+
+            createjs.Sound.play(correct);
+            played = true;
+
             if (grid[y][x] == fruit) {
-            $('[data-x="'+x+'"][data-y="'+(y -1)+'"]').addClass('removed');
+                $('[data-x="'+x+'"][data-y="'+(y -1)+'"]').addClass('removed');
             }
+
             current = (y - 1);
             console.log('top matches');
             console.log('removed: '+ x + ''+y);
             checkUp(x, current, fruit);
+            played = false;
         }else{
             console.log('top does not match');
+            if (played === false){
+                createjs.Sound.play(incorrect);
+            }
         }
     }
 }
