@@ -70,24 +70,89 @@ function checkUp(x, y, fruit)
 {   
     if (y !== 0) {
         if (grid[(y - 1)][x] == fruit) {
-            $('[data-x="'+x+'"][data-y="'+y+'"]').addClass('removed');
-
-            createjs.Sound.play(correct);
-            played = true;
+                $('[data-x="'+x+'"][data-y="'+y+'"]').addClass('removed');
+                createjs.Sound.play(correct);
+                played = true;
 
             if (grid[y][x] == fruit) {
                 $('[data-x="'+x+'"][data-y="'+(y -1)+'"]').addClass('removed');
             }
 
             current = (y - 1);
-            console.log('top matches');
-            console.log('removed: '+ x + ''+y);
             checkUp(x, current, fruit);
             played = false;
         }else{
-            console.log('top does not match');
             if (played === false){
-                createjs.Sound.play(incorrect);
+                // createjs.Sound.play(incorrect);
+            }
+        }
+    }
+}
+
+function checkDown(x, y, fruit)
+{   
+    if (y !== 9) {
+        if (grid[(y + 1)][x] == fruit) {
+                $('[data-x="'+x+'"][data-y="'+y+'"]').addClass('removed');
+                createjs.Sound.play(correct);
+                played = true;
+
+            if (grid[y][x] == fruit) {
+                $('[data-x="'+x+'"][data-y="'+(y + 1)+'"]').addClass('removed');
+            }
+
+            current = (y + 1);
+            checkDown(x, current, fruit);
+            played = false;
+        }else{
+            if (played === false){
+                // createjs.Sound.play(incorrect);
+            }
+        }
+    }
+}
+
+function checkLeft(x, y, fruit)
+{   
+    if (x !== 0) {
+        if (grid[(y)][x - 1] == fruit) {
+                $('[data-x="'+x+'"][data-y="'+y+'"]').addClass('removed');
+                createjs.Sound.play(correct);
+                played = true;
+
+            if (grid[y][x] == fruit) {
+                $('[data-x="'+(x - 1)+'"][data-y="'+(y)+'"]').addClass('removed');
+            }
+
+            current = (x - 1);
+            checkLeft(current, y, fruit);
+            played = false;
+        }else{
+            if (played === false){
+                // createjs.Sound.play(incorrect);
+            }
+        }
+    }
+}
+
+function checkRight(x, y, fruit)
+{   
+    if (x !== 9) {
+        if (grid[(y)][x + 1] == fruit) {
+                $('[data-x="'+x+'"][data-y="'+y+'"]').addClass('removed');
+                createjs.Sound.play(correct);
+                played = true;
+
+            if (grid[y][x] == fruit) {
+                $('[data-x="'+(x + 1)+'"][data-y="'+(y)+'"]').addClass('removed');
+            }
+
+            current = (x + 1);
+            checkLeft(current, y, fruit);
+            played = false;
+        }else{
+            if (played === false){
+                // createjs.Sound.play(incorrect);
             }
         }
     }
@@ -96,13 +161,19 @@ function checkUp(x, y, fruit)
 initializeGrid();
 randomizeGrid();
 
-
 $('.cell').click(function(){
-    fruit = $(this).data('fruit');
-    x = $(this).data('x');
-    y = $(this).data('y');
-    fruit = $(this).data('fruit');
+    if ($(this).hasClass('removed')){
 
-    checkUp(x, y, fruit);
+    }else{
+        fruit = $(this).data('fruit');
+        x = $(this).data('x');
+        y = $(this).data('y');
+        fruit = $(this).data('fruit');
+
+        checkUp(x, y, fruit);
+        checkDown(x, y, fruit);
+        checkLeft(x, y, fruit);
+        checkRight(x, y, fruit);
+    }
 });
 
